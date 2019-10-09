@@ -61,6 +61,9 @@
 #ifndef ELP2000_H
 #define ELP2000_H
 
+// don't say I didn't warn you--
+#define DIRTY_DEEDS_DONE_DIRT_CHEAP 1
+
 /*
  * A datatype defining spherical coordiantes point consisting of longitude, latitude and radial distance (altitude).
  */
@@ -87,6 +90,14 @@ typedef struct {
  * Source: Lunar Solution ELP 2000-82B. Explanatory note, pp. 11-12.
  */
 spherical_point geocentric_moon_position(double t);
+
+double precession_of_date(double t);
+
+/*
+ * very very quick n' dirty solar longitude calculation, done dirt cheap
+ * (two out of three cheap, fast, and correct? how's one sound?)
+ */
+double solar_longitude_of_date(double t);
 
 /*
  * Computes geocentric position of the Moon in spherical coordiantes (longitude, latitude, distance) referred to the

@@ -16,7 +16,9 @@
 #include "series.h"
 #include "arguments.h"
 
+#define _USE_MATH_DEFINES
 #include <math.h>
+#include <time.h>
 
 spherical_point geocentric_moon_position(double t)
 {
@@ -148,6 +150,37 @@ spherical_point geocentric_moon_position(double t)
     return sp;
 }
 
+double precession_of_date(double t)
+{
+    // computing accumulated precession between J2000 and a given date
+    return 5029.0966 * t + 1.1120 * t * t + 0.000077 * t * t * t - 0.00002353 * t * t * t * t;
+}
+
+// roughly # of days since equinox in degrees; those Ancient Egyptians were some smart ladies and fellas.
+// perhaps they had a 360 day calendar not because they didn't realize there were more like 365.25 solar days in a year,
+// but because 360 is a nice round number divisible by 2,3,4,5,6,8,9,10,12,15,20,30,36,45,60,90,and 180 did I miss any?
+double solar_longitude_of_date(double t)
+{
+#if DIRTY_DEEDS_DONE_DIRT_CHEAP
+    const time_t jd2000_epoch_unixtime = 946728000;
+    const double vernal_equinox = 1553119080 - jd2000_epoch_unixtime;
+    const double solar_longitude = (360.0/365.25) * (t - vernal_equinox) / 86400.0;
+    return solar_longitude; // TODO + precession_of_date();
+#else
+#error blah blah blah its FUBAR
+    // L(t) = mean longitude λ(t) + mean anomaly M(t)
+    const double λ_bar_0 = 280.458;
+    const double M_0 = 357.588;
+    const double n = 0.98564735;
+    const double e = 0.016711;
+    const double λ_bar = λ_bar_0 + n * t;
+    const double M = M_0 + n * t;
+    const double q = 2.0 * e * sin(M) + 1.25 * e * e * sin(2.0 * M);
+    const double λ = λ_bar + q;
+    return λ;
+#endif
+}
+
 spherical_point geocentric_moon_position_of_date(double t)
 {
     spherical_point sp;         // geocentric Moon position referred to ELP reference frame
@@ -156,11 +189,8 @@ spherical_point geocentric_moon_position_of_date(double t)
     // calculating Moon's position referred to ELP reference frame
     sp = geocentric_moon_position(t);
     
-    // computing accumulated precession between J2000 and a given date
-    p = 5029.0966 * t + 1.1120 * t * t + 0.000077 * t * t * t - 0.00002353 * t * t * t * t;
-    
     // adding accumulated precession to the longitude of Moon's position
-    sp.longitude += p;
+    sp.longitude += precession_of_date(t);
     
     return sp;
 }
