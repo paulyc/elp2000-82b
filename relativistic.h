@@ -35,7 +35,7 @@
 #define TOTAL_RELATIVISTIC_LATITUDE_TERMS 4
 #define TOTAL_RELATIVISTIC_DISTANCE_TERMS 10
 
-int relativistic_longitude_multipliers[TOTAL_RELATIVISTIC_LONGITUDE_TERMS * 5] = {
+static const int relativistic_longitude_multipliers[TOTAL_RELATIVISTIC_LONGITUDE_TERMS * 5] = {
     0, 0, 1, -1, 0,
     0, 0, 1, 0, 0,
     0, 0, 1, 1, 0,
@@ -48,13 +48,13 @@ int relativistic_longitude_multipliers[TOTAL_RELATIVISTIC_LONGITUDE_TERMS * 5] =
     0, 2, 1, -1, 0,
     0, 4, 0, -1, 0
 };
-int relativistic_latitude_multipliers[TOTAL_RELATIVISTIC_LATITUDE_TERMS * 5] = {
+static const int relativistic_latitude_multipliers[TOTAL_RELATIVISTIC_LATITUDE_TERMS * 5] = {
     0, 0, 1, 0, -1,
     0, 0, 1, 0, 1,
     0, 2, 0, 0, -1,
     0, 2, 0, 0, 1
 };
-int relativistic_distance_multipliers[TOTAL_RELATIVISTIC_DISTANCE_TERMS * 5] = {
+static const int relativistic_distance_multipliers[TOTAL_RELATIVISTIC_DISTANCE_TERMS * 5] = {
     0, 0, 0, 0, 0,
     0, 0, 0, 1, 0,
     0, 0, 1, -1, 0,
@@ -67,7 +67,7 @@ int relativistic_distance_multipliers[TOTAL_RELATIVISTIC_DISTANCE_TERMS * 5] = {
     0, 2, 0, 1, 0
 };
 
-double relativistic_longitude_coefficients[TOTAL_RELATIVISTIC_LONGITUDE_TERMS * 3] = {
+static const double relativistic_longitude_coefficients[TOTAL_RELATIVISTIC_LONGITUDE_TERMS * 3] = {
     179.93473, 0.00006, 0.082,
     179.98532, 0.00081, 1.000,
     179.96323, 0.00005, 0.070,
@@ -80,13 +80,13 @@ double relativistic_longitude_coefficients[TOTAL_RELATIVISTIC_LONGITUDE_TERMS * 
     180.74954, 0.00001, 0.080,
     180.00035, 0.00001, 0.028
 };
-double relativistic_latitude_coefficients[TOTAL_RELATIVISTIC_LATITUDE_TERMS * 3] = {
+static const double relativistic_latitude_coefficients[TOTAL_RELATIVISTIC_LATITUDE_TERMS * 3] = {
     179.99803, 0.00004, 0.081,
     179.99798, 0.00004, 0.069,
     359.99810, 0.00002, 0.088,
     180.00026, 0.00002, 0.026
 };
-double relativistic_distance_coefficients[TOTAL_RELATIVISTIC_DISTANCE_TERMS * 3] = {
+static const double relativistic_distance_coefficients[TOTAL_RELATIVISTIC_DISTANCE_TERMS * 3] = {
     270.00000, 0.00828, 99999.999,
     89.99994, 0.00043, 0.075,
     269.93292, 0.00005, 0.082,

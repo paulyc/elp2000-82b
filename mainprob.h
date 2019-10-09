@@ -33,7 +33,7 @@
 #define TOTAL_MAIN_PROBLEM_LATITUDE_TERMS 918
 #define TOTAL_MAIN_PROBLEM_DISTANCE_TERMS 704
 
-int main_problem_longitude_multipliers[TOTAL_MAIN_PROBLEM_LONGITUDE_TERMS * 4] = {
+static const int main_problem_longitude_multipliers[TOTAL_MAIN_PROBLEM_LONGITUDE_TERMS * 4] = {
     0, 0, 0, 2,
     0, 0, 0, 4,
     0, 0, 0, 6,
@@ -1058,7 +1058,7 @@ int main_problem_longitude_multipliers[TOTAL_MAIN_PROBLEM_LONGITUDE_TERMS * 4] =
     10, 0, -1, 0,
     10, 0, 0, 0
 };
-int main_problem_latitude_multipliers[TOTAL_MAIN_PROBLEM_LATITUDE_TERMS * 4] = {
+static const int main_problem_latitude_multipliers[TOTAL_MAIN_PROBLEM_LATITUDE_TERMS * 4] = {
     0, 0, 0, 1,
     0, 0, 0, 3,
     0, 0, 0, 5,
@@ -1978,7 +1978,7 @@ int main_problem_latitude_multipliers[TOTAL_MAIN_PROBLEM_LATITUDE_TERMS * 4] = {
     10, 0, -2, 1,
     10, 0, -1, -1
 };
-int main_problem_distance_multipliers[TOTAL_MAIN_PROBLEM_DISTANCE_TERMS * 4] = {
+static const int main_problem_distance_multipliers[TOTAL_MAIN_PROBLEM_DISTANCE_TERMS * 4] = {
     0, 0, 0, 0,
     0, 0, 0, 2,
     0, 0, 0, 4,
@@ -2685,7 +2685,7 @@ int main_problem_distance_multipliers[TOTAL_MAIN_PROBLEM_DISTANCE_TERMS * 4] = {
     10, 0, -1, 0
 };
 
-double main_problem_longitude_coefficients[TOTAL_MAIN_PROBLEM_LONGITUDE_TERMS * 7] = {
+static const double main_problem_longitude_coefficients[TOTAL_MAIN_PROBLEM_LONGITUDE_TERMS * 7] = {
     -411.60287, 168.48, -18433.81, -121.62, 0.40, -0.18, 0.00,
     0.42034, -0.39, 37.65, 0.57, 0.00, 0.00, 0.00,
     -0.00059, 0.00, -0.08, 0.00, 0.00, 0.00, 0.00,
@@ -3710,7 +3710,7 @@ double main_problem_longitude_coefficients[TOTAL_MAIN_PROBLEM_LONGITUDE_TERMS * 
     0.00006, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
     0.00002, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00
 };
-double main_problem_latitude_coefficients[TOTAL_MAIN_PROBLEM_LATITUDE_TERMS * 7] = {
+static const double main_problem_latitude_coefficients[TOTAL_MAIN_PROBLEM_LATITUDE_TERMS * 7] = {
     18461.40000, 0.00, 412529.61, 0.00, 0.00, 0.00, 0.00,
     -6.29664, 7.68, -422.65, -13.21, 0.02, -0.02, 0.00,
     0.00592, 0.00, 0.66, 0.02, 0.00, 0.00, 0.00,
@@ -4630,7 +4630,7 @@ double main_problem_latitude_coefficients[TOTAL_MAIN_PROBLEM_LATITUDE_TERMS * 7]
     0.00002, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
     0.00002, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00
 };
-double main_problem_distance_coefficients[TOTAL_MAIN_PROBLEM_DISTANCE_TERMS * 7] = {
+static const double main_problem_distance_coefficients[TOTAL_MAIN_PROBLEM_DISTANCE_TERMS * 7] = {
     385000.52719, -7992.63, -11.06, 21578.08, -4.53, 11.39, -0.06,
     -3.14837, -204.48, -138.94, 159.64, -0.39, 0.12, 0.00,
     -0.00003, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,

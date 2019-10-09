@@ -17,7 +17,7 @@ static const double precession_constant = 5029.0966;
  *
  * Source: M. Chapront-Touzè, J. Chapront, G. Francou. Lunar Solution ELP version ELP 2000-82B, 2001 (1985), p. 10
  */
-static double elp2000_arguments_coefficients[TOTAL_ELP2000_ARGUMENTS * FULL_SERIES_TOTAL_TERMS] = {
+static const double elp2000_arguments_coefficients[TOTAL_ELP2000_ARGUMENTS * FULL_SERIES_TOTAL_TERMS] = {
     // coefficients of the mean mean longitude of the Moon (W₁)
     785939.95571, 1732559343.73604, -5.8883, 0.006604, -0.00003169,
     // coefficients of the mean longitude of the lunar perigee (W₂)
@@ -36,7 +36,7 @@ static double elp2000_arguments_coefficients[TOTAL_ELP2000_ARGUMENTS * FULL_SERI
  *
  * Source: M. Chapront-Touzè, J. Chapront, G. Francou. Lunar Solution ELP version ELP 2000-82B, 2001 (1985), p. 7
  */
-static double planetary_arguments_coefficients[TOTAL_PLANETARY_ARGUMENTS * LINEAR_SERIES_TOTAL_TERMS] = {
+static const double planetary_arguments_coefficients[TOTAL_PLANETARY_ARGUMENTS * LINEAR_SERIES_TOTAL_TERMS] = {
     908103.25986, 538101628.68898,    // Mercury
     655127.28305, 210664136.43355,    // Venus
     361679.22059, 129597742.2758,     // Earth (T from ELP2000 arguments)

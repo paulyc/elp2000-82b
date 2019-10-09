@@ -35,7 +35,7 @@
 #define TOTAL_PLANETARY_LATITUDE_2_TERMS 13
 #define TOTAL_PLANETARY_DISTANCE_2_TERMS 19
 
-int planetary_longitude_2_multipliers[TOTAL_PLANETARY_LONGITUDE_2_TERMS * 5] = {
+static const int planetary_longitude_2_multipliers[TOTAL_PLANETARY_LONGITUDE_2_TERMS * 5] = {
     0, 0, 1, -2, 0,
     0, 0, 1, -1, 0,
     0, 0, 1, 0, 0,
@@ -65,7 +65,7 @@ int planetary_longitude_2_multipliers[TOTAL_PLANETARY_LONGITUDE_2_TERMS * 5] = {
     0, 4, -1, -1, 0,
     0, 4, -1, 0, 0
 };
-int planetary_latitude_2_multipliers[TOTAL_PLANETARY_LATITUDE_2_TERMS * 5] = {
+static const int planetary_latitude_2_multipliers[TOTAL_PLANETARY_LATITUDE_2_TERMS * 5] = {
     0, 0, 1, -1, -1,
     0, 0, 1, -1, 1,
     0, 0, 1, 0, -1,
@@ -80,7 +80,7 @@ int planetary_latitude_2_multipliers[TOTAL_PLANETARY_LATITUDE_2_TERMS * 5] = {
     0, 2, -1, 1, -1,
     0, 2, 1, 0, -1
 };
-int planetary_distance_2_multipliers[TOTAL_PLANETARY_DISTANCE_2_TERMS * 5] = {
+static const int planetary_distance_2_multipliers[TOTAL_PLANETARY_DISTANCE_2_TERMS * 5] = {
     0, 0, 1, -2, 0,
     0, 0, 1, -1, 0,
     0, 0, 1, 0, 0,
@@ -102,7 +102,7 @@ int planetary_distance_2_multipliers[TOTAL_PLANETARY_DISTANCE_2_TERMS * 5] = {
     0, 4, -1, -1, 0
 };
 
-double planetary_longitude_2_coefficients[TOTAL_PLANETARY_LONGITUDE_2_TERMS * 3] = {
+static const double planetary_longitude_2_coefficients[TOTAL_PLANETARY_LONGITUDE_2_TERMS * 3] = {
     0.00000, 0.00007, 0.039,
     0.00000, 0.00108, 0.082,
     0.00000, 0.00487, 1.000,
@@ -132,7 +132,7 @@ double planetary_longitude_2_coefficients[TOTAL_PLANETARY_LONGITUDE_2_TERMS * 3]
     180.00000, 0.00003, 0.028,
     180.00000, 0.00001, 0.021
 };
-double planetary_latitude_2_coefficients[TOTAL_PLANETARY_LATITUDE_2_TERMS * 3] = {
+static const double planetary_latitude_2_coefficients[TOTAL_PLANETARY_LATITUDE_2_TERMS * 3] = {
     0.00000, 0.00005, 0.039,
     0.00000, 0.00004, 0.857,
     0.00000, 0.00004, 0.081,
@@ -147,7 +147,7 @@ double planetary_latitude_2_coefficients[TOTAL_PLANETARY_LATITUDE_2_TERMS * 3] =
     180.00000, 0.00001, 0.042,
     0.00000, 0.00009, 0.081
 };
-double planetary_distance_2_coefficients[TOTAL_PLANETARY_DISTANCE_2_TERMS * 3] = {
+static const double planetary_distance_2_coefficients[TOTAL_PLANETARY_DISTANCE_2_TERMS * 3] = {
     90.00000, 0.00005, 0.039,
     90.00000, 0.00095, 0.082,
     270.00000, 0.00036, 1.000,

@@ -35,7 +35,7 @@
 #define TOTAL_MOON_FIGURE_LATITUDE_TERMS 12
 #define TOTAL_MOON_FIGURE_DISTANCE_TERMS 14
 
-int moon_figure_longitude_multipliers[TOTAL_MOON_FIGURE_LONGITUDE_TERMS * 5] = {
+static const int moon_figure_longitude_multipliers[TOTAL_MOON_FIGURE_LONGITUDE_TERMS * 5] = {
     0, 0, 0, 0, 1,
     0, 0, 0, 1, -1,
     0, 0, 0, 2, -2,
@@ -57,7 +57,7 @@ int moon_figure_longitude_multipliers[TOTAL_MOON_FIGURE_LONGITUDE_TERMS * 5] = {
     0, 2, 1, -1, 0,
     0, 2, 1, 0, 0
 };
-int moon_figure_latitude_multipliers[TOTAL_MOON_FIGURE_LATITUDE_TERMS * 5] = {
+static const int moon_figure_latitude_multipliers[TOTAL_MOON_FIGURE_LATITUDE_TERMS * 5] = {
     0, 0, 0, 1, -1,
     0, 0, 0, 1, 0,
     0, 0, 0, 1, 1,
@@ -71,7 +71,7 @@ int moon_figure_latitude_multipliers[TOTAL_MOON_FIGURE_LATITUDE_TERMS * 5] = {
     0, 2, 0, -2, 1,
     0, 2, 0, 0, -1
 };
-int moon_figure_distance_multipliers[TOTAL_MOON_FIGURE_DISTANCE_TERMS * 5] = {
+static const int moon_figure_distance_multipliers[TOTAL_MOON_FIGURE_DISTANCE_TERMS * 5] = {
     0, 0, 0, 0, 0,
     0, 0, 0, 0, 1,
     0, 0, 0, 0, 2,
@@ -88,7 +88,7 @@ int moon_figure_distance_multipliers[TOTAL_MOON_FIGURE_DISTANCE_TERMS * 5] = {
     0, 2, 1, 0, 0
 };
 
-double moon_figure_longitude_coefficients[TOTAL_MOON_FIGURE_LONGITUDE_TERMS * 3] = {
+static const double moon_figure_longitude_coefficients[TOTAL_MOON_FIGURE_LONGITUDE_TERMS * 3] = {
     303.96185, 0.00004, 0.075,
     259.88393, 0.00016, 5.997,
     0.43020, 0.00040, 2.998,
@@ -110,7 +110,7 @@ double moon_figure_longitude_coefficients[TOTAL_MOON_FIGURE_LONGITUDE_TERMS * 3]
     0.00313, 0.00002, 0.080,
     359.99965, 0.00002, 0.039
 };
-double moon_figure_latitude_coefficients[TOTAL_MOON_FIGURE_LATITUDE_TERMS * 3] = {
+static const double moon_figure_latitude_coefficients[TOTAL_MOON_FIGURE_LATITUDE_TERMS * 3] = {
     0.02199, 0.00003, 5.997,
     245.99067, 0.00001, 0.075,
     0.00530, 0.00001, 0.037,
@@ -124,7 +124,7 @@ double moon_figure_latitude_coefficients[TOTAL_MOON_FIGURE_LATITUDE_TERMS * 3] =
     179.98353, 0.00001, 0.086,
     179.99478, 0.00005, 0.088
 };
-double moon_figure_distance_coefficients[TOTAL_MOON_FIGURE_DISTANCE_TERMS * 3] = {
+static const double moon_figure_distance_coefficients[TOTAL_MOON_FIGURE_DISTANCE_TERMS * 3] = {
     90.00000, 0.00130, 99999.999,
     213.95720, 0.00003, 0.075,
     270.03745, 0.00002, 0.037,

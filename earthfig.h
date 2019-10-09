@@ -40,7 +40,7 @@
 #define TOTAL_EARTH_FIGURE_LATITUDE_1_TERMS 11
 #define TOTAL_EARTH_FIGURE_DISTANCE_1_TERMS 8
 
-int earth_figure_longitude_0_multipliers[TOTAL_EARTH_FIGURE_LONGITUDE_0_TERMS * 5] = {
+static const int earth_figure_longitude_0_multipliers[TOTAL_EARTH_FIGURE_LONGITUDE_0_TERMS * 5] = {
     0, 0, 0, 0, 1,
     0, 0, 0, 0, 2,
     0, 0, 0, 1, -2,
@@ -389,7 +389,7 @@ int earth_figure_longitude_0_multipliers[TOTAL_EARTH_FIGURE_LONGITUDE_0_TERMS * 
     2, 2, 0, 1, -2,
     2, 4, 0, -1, -2
 };
-int earth_figure_latitude_0_multipliers[TOTAL_EARTH_FIGURE_LATITUDE_0_TERMS * 5] = {
+static const int earth_figure_latitude_0_multipliers[TOTAL_EARTH_FIGURE_LATITUDE_0_TERMS * 5] = {
     0, 0, 0, 0, 3,
     0, 0, 0, 1, -3,
     0, 0, 0, 1, -1,
@@ -707,7 +707,7 @@ int earth_figure_latitude_0_multipliers[TOTAL_EARTH_FIGURE_LATITUDE_0_TERMS * 5]
     2, 2, 0, 1, -1,
     2, 4, 0, -1, -1
 };
-int earth_figure_distance_0_multipliers[TOTAL_EARTH_FIGURE_DISTANCE_0_TERMS * 5] = {
+static const int earth_figure_distance_0_multipliers[TOTAL_EARTH_FIGURE_DISTANCE_0_TERMS * 5] = {
     0, 0, 0, 0, 0,
     0, 0, 0, 0, 1,
     0, 0, 0, 0, 2,
@@ -947,7 +947,7 @@ int earth_figure_distance_0_multipliers[TOTAL_EARTH_FIGURE_DISTANCE_0_TERMS * 5]
     2, 2, 0, 1, -2
 };
 
-double earth_figure_longitude_0_coefficients[TOTAL_EARTH_FIGURE_LONGITUDE_0_TERMS * 3] = {
+static const double earth_figure_longitude_0_coefficients[TOTAL_EARTH_FIGURE_LONGITUDE_0_TERMS * 3] = {
     270.00000, 0.00003, 0.075,
     0.00000, 0.00037, 0.037,
     180.00000, 0.00480, 0.074,
@@ -1296,7 +1296,7 @@ double earth_figure_longitude_0_coefficients[TOTAL_EARTH_FIGURE_LONGITUDE_0_TERM
     180.00000, 0.00007, 0.026,
     180.00000, 0.00001, 0.028
 };
-double earth_figure_latitude_0_coefficients[TOTAL_EARTH_FIGURE_LATITUDE_0_TERMS * 3] = {
+static const double earth_figure_latitude_0_coefficients[TOTAL_EARTH_FIGURE_LATITUDE_0_TERMS * 3] = {
     0.00000, 0.00003, 0.025,
     180.00000, 0.00021, 0.037,
     0.00000, 0.00056, 5.997,
@@ -1614,7 +1614,7 @@ double earth_figure_latitude_0_coefficients[TOTAL_EARTH_FIGURE_LATITUDE_0_TERMS 
     0.00000, 0.00006, 0.019,
     0.00000, 0.00001, 0.020
 };
-double earth_figure_distance_0_coefficients[TOTAL_EARTH_FIGURE_DISTANCE_0_TERMS * 3] = {
+static const double earth_figure_distance_0_coefficients[TOTAL_EARTH_FIGURE_DISTANCE_0_TERMS * 3] = {
     90.00000, 0.04301, 99999.999,
     180.00000, 0.00003, 0.075,
     270.00000, 0.00004, 0.037,
@@ -1854,7 +1854,7 @@ double earth_figure_distance_0_coefficients[TOTAL_EARTH_FIGURE_DISTANCE_0_TERMS 
     90.00000, 0.00005, 0.026
 };
 
-int earth_figure_longitude_1_multipliers[TOTAL_EARTH_FIGURE_LONGITUDE_1_TERMS * 5] = {
+static const int earth_figure_longitude_1_multipliers[TOTAL_EARTH_FIGURE_LONGITUDE_1_TERMS * 5] = {
     1, -2, 0, 0, -1,
     1, -2, 0, 0, 1,
     1, -2, 0, 1, -1,
@@ -1870,7 +1870,7 @@ int earth_figure_longitude_1_multipliers[TOTAL_EARTH_FIGURE_LONGITUDE_1_TERMS * 
     1, 2, 0, 0, -1,
     2, 0, 0, 0, -2
 };
-int earth_figure_latitude_1_multipliers[TOTAL_EARTH_FIGURE_LATITUDE_1_TERMS * 5] = {
+static const int earth_figure_latitude_1_multipliers[TOTAL_EARTH_FIGURE_LATITUDE_1_TERMS * 5] = {
     1, -2, 0, 0, 0,
     1, -2, 0, 1, 0,
     1, 0, 0, -1, -2,
@@ -1883,7 +1883,7 @@ int earth_figure_latitude_1_multipliers[TOTAL_EARTH_FIGURE_LATITUDE_1_TERMS * 5]
     1, 2, 0, 0, 0,
     2, 0, 0, 0, -1
 };
-int earth_figure_distance_1_multipliers[TOTAL_EARTH_FIGURE_DISTANCE_1_TERMS * 5] = {
+static const int earth_figure_distance_1_multipliers[TOTAL_EARTH_FIGURE_DISTANCE_1_TERMS * 5] = {
     0, 0, 0, 0, 0,
     1, -2, 0, 0, -1,
     1, -2, 0, 1, -1,
@@ -1894,7 +1894,7 @@ int earth_figure_distance_1_multipliers[TOTAL_EARTH_FIGURE_DISTANCE_1_TERMS * 5]
     1, 2, 0, 0, -1
 };
 
-double earth_figure_longitude_1_coefficients[TOTAL_EARTH_FIGURE_LONGITUDE_1_TERMS * 3] = {
+static const double earth_figure_longitude_1_coefficients[TOTAL_EARTH_FIGURE_LONGITUDE_1_TERMS * 3] = {
     180.00000, 0.00003, 0.040,
     180.00000, 0.00002, 0.487,
     180.00000, 0.00002, 0.087,
@@ -1910,7 +1910,7 @@ double earth_figure_longitude_1_coefficients[TOTAL_EARTH_FIGURE_LONGITUDE_1_TERM
     180.00000, 0.00004, 0.041,
     0.00000, 0.00004, 9.307
 };
-double earth_figure_latitude_1_coefficients[TOTAL_EARTH_FIGURE_LATITUDE_1_TERMS * 3] = {
+static const double earth_figure_latitude_1_coefficients[TOTAL_EARTH_FIGURE_LATITUDE_1_TERMS * 3] = {
     180.00000, 0.00012, 0.088,
     180.00000, 0.00003, 0.530,
     180.00000, 0.00001, 0.037,
@@ -1923,7 +1923,7 @@ double earth_figure_latitude_1_coefficients[TOTAL_EARTH_FIGURE_LATITUDE_1_TERMS 
     0.00000, 0.00002, 0.026,
     180.00000, 0.00009, 0.075
 };
-double earth_figure_distance_1_coefficients[TOTAL_EARTH_FIGURE_DISTANCE_1_TERMS * 3] = {
+static const double earth_figure_distance_1_coefficients[TOTAL_EARTH_FIGURE_DISTANCE_1_TERMS * 3] = {
     270.00000, 0.00004, 99999.999,
     270.00000, 0.00004, 0.040,
     270.00000, 0.00002, 0.087,

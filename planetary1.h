@@ -40,7 +40,7 @@
 #define TOTAL_PLANETARY1_LATITUDE_1_TERMS 833
 #define TOTAL_PLANETARY1_DISTANCE_1_TERMS 1715
 
-int planetary1_longitude_0_multipliers[TOTAL_PLANETARY1_LONGITUDE_0_TERMS * 11] = {
+static const int planetary1_longitude_0_multipliers[TOTAL_PLANETARY1_LONGITUDE_0_TERMS * 11] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -2,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
@@ -14370,7 +14370,7 @@ int planetary1_longitude_0_multipliers[TOTAL_PLANETARY1_LONGITUDE_0_TERMS * 11] 
     12, 0, -12, 0, 2, 0, 0, 0, -2, -1, 0,
     17, 0, -22, 0, 0, 0, 0, 0, -5, 1, 0
 };
-int planetary1_latitude_0_multipliers[TOTAL_PLANETARY1_LATITUDE_0_TERMS * 11] = {
+static const int planetary1_latitude_0_multipliers[TOTAL_PLANETARY1_LATITUDE_0_TERMS * 11] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
@@ -19605,7 +19605,7 @@ int planetary1_latitude_0_multipliers[TOTAL_PLANETARY1_LATITUDE_0_TERMS * 11] = 
     7, 0, -4, 0, 0, 0, 0, 0, -2, 0, -1,
     7, 0, -4, 0, 0, 0, 0, 0, -2, 0, 1
 };
-int planetary1_distance_0_multipliers[TOTAL_PLANETARY1_DISTANCE_0_TERMS * 11] = {
+static const int planetary1_distance_0_multipliers[TOTAL_PLANETARY1_DISTANCE_0_TERMS * 11] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -2,
@@ -26239,7 +26239,7 @@ int planetary1_distance_0_multipliers[TOTAL_PLANETARY1_DISTANCE_0_TERMS * 11] = 
     5, 0, -7, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-double planetary1_longitude_0_coefficients[TOTAL_PLANETARY1_LONGITUDE_0_TERMS * 3] = {
+static const double planetary1_longitude_0_coefficients[TOTAL_PLANETARY1_LONGITUDE_0_TERMS * 3] = {
     359.99831, 0.00020, 0.037,
     359.98254, 0.00007, 0.074,
     359.93674, 0.00962, 0.075,
@@ -40569,7 +40569,7 @@ double planetary1_longitude_0_coefficients[TOTAL_PLANETARY1_LONGITUDE_0_TERMS * 
     207.32678, 0.00017, 2204.260,
     332.53824, 0.00002, 411.722
 };
-double planetary1_latitude_0_coefficients[TOTAL_PLANETARY1_LATITUDE_0_TERMS * 3] = {
+static const double planetary1_latitude_0_coefficients[TOTAL_PLANETARY1_LATITUDE_0_TERMS * 3] = {
     179.93197, 0.00068, 0.075,
     359.92861, 0.00007, 5.997,
     359.97739, 0.00040, 0.037,
@@ -45804,7 +45804,7 @@ double planetary1_latitude_0_coefficients[TOTAL_PLANETARY1_LATITUDE_0_TERMS * 3]
     138.00381, 0.00001, 0.076,
     138.00381, 0.00001, 0.073
 };
-double planetary1_distance_0_coefficients[TOTAL_PLANETARY1_DISTANCE_0_TERMS * 3] = {
+static const double planetary1_distance_0_coefficients[TOTAL_PLANETARY1_DISTANCE_0_TERMS * 3] = {
     90.00000, 0.02045, 99999.999,
     270.01562, 0.00037, 0.037,
     89.99679, 0.00010, 0.074,
@@ -52438,7 +52438,7 @@ double planetary1_distance_0_coefficients[TOTAL_PLANETARY1_DISTANCE_0_TERMS * 3]
     52.90780, 0.00003, 0.073
 };
 
-int planetary1_longitude_1_multipliers[TOTAL_PLANETARY1_LONGITUDE_1_TERMS * 11] = {
+static const int planetary1_longitude_1_multipliers[TOTAL_PLANETARY1_LONGITUDE_1_TERMS * 11] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0,
@@ -56824,7 +56824,7 @@ int planetary1_longitude_1_multipliers[TOTAL_PLANETARY1_LONGITUDE_1_TERMS * 11] 
     9, 0, -13, 0, 0, 0, 0, 0, -2, 0, 0,
     13, 0, -16, 0, 0, 0, 0, 0, -2, -1, 0
 };
-int planetary1_latitude_1_multipliers[TOTAL_PLANETARY1_LATITUDE_1_TERMS * 11] = {
+static const int planetary1_latitude_1_multipliers[TOTAL_PLANETARY1_LATITUDE_1_TERMS * 11] = {
     0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 2, 0, -1,
     0, 0, 0, 0, 1, 0, 0, 0, -2, 0, 1,
@@ -57659,7 +57659,7 @@ int planetary1_latitude_1_multipliers[TOTAL_PLANETARY1_LATITUDE_1_TERMS * 11] = 
     3, 0, -1, 0, 0, 0, 0, 0, -2, 1, -1,
     3, 0, -1, 0, 0, 0, 0, 0, -2, 1, 1
 };
-int planetary1_distance_1_multipliers[TOTAL_PLANETARY1_DISTANCE_1_TERMS * 11] = {
+static const int planetary1_distance_1_multipliers[TOTAL_PLANETARY1_DISTANCE_1_TERMS * 11] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 2, -3, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 2, -2, 0,
@@ -59377,7 +59377,7 @@ int planetary1_distance_1_multipliers[TOTAL_PLANETARY1_DISTANCE_1_TERMS * 11] = 
     3, 0, -1, 0, 0, 0, 0, 0, -2, 0, 0
 };
 
-double planetary1_longitude_1_coefficients[TOTAL_PLANETARY1_LONGITUDE_1_TERMS * 3] = {
+static const double planetary1_longitude_1_coefficients[TOTAL_PLANETARY1_LONGITUDE_1_TERMS * 3] = {
     270.00000, 0.00011, 99999.999,
     277.11719, 0.00002, 0.075,
     3.01272, 0.00001, 0.038,
@@ -63763,7 +63763,7 @@ double planetary1_longitude_1_coefficients[TOTAL_PLANETARY1_LONGITUDE_1_TERMS * 
     322.07377, 0.00001, 2.712,
     214.04379, 0.00001, 62.252
 };
-double planetary1_latitude_1_coefficients[TOTAL_PLANETARY1_LATITUDE_1_TERMS * 3] = {
+static const double planetary1_latitude_1_coefficients[TOTAL_PLANETARY1_LATITUDE_1_TERMS * 3] = {
     73.43578, 0.00010, 0.081,
     277.11719, 0.00005, 0.088,
     300.69188, 0.00004, 0.089,
@@ -64598,7 +64598,7 @@ double planetary1_latitude_1_coefficients[TOTAL_PLANETARY1_LATITUDE_1_TERMS * 3]
     218.71494, 0.00001, 0.074,
     218.71494, 0.00001, 0.075
 };
-double planetary1_distance_1_coefficients[TOTAL_PLANETARY1_DISTANCE_1_TERMS * 3] = {
+static const double planetary1_distance_1_coefficients[TOTAL_PLANETARY1_DISTANCE_1_TERMS * 3] = {
     90.00000, 0.00003, 99999.999,
     277.41835, 0.00002, 0.067,
     177.30367, 0.00002, 0.564,

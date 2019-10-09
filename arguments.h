@@ -93,7 +93,8 @@ void compute_elp2000_arguments(double t, int n, double arguments[]);
  * Output is written into given array and is measured in arcseconds.
  *
  * Source:Lunar Solution ELP 2000-82B. Explanatory note, p. 5
- */void compute_delaunay_arguments(double t, int n, double arguments[]);
+ */
+void compute_delaunay_arguments(double t, int n, double arguments[]);
 
 /*
  * Computes mean longitudes of the major planets of the Solar System (planetary arguments) given time instant (t)
