@@ -7,38 +7,29 @@
 
 #include "elp2000-82b.h"
 
-const double jd2000_epoch_jd = 2451545.0; // 2000-01-01T12:00:00.000Z, Unixtime 946728000
-const time_t jd2000_epoch_unixtime = 946728000;
+static const double jd2000_epoch_jd = 2451545.0; // 2000-01-01T12:00:00.000Z, Unixtime 946728000
+static const time_t jd2000_epoch_unixtime = 946728000;
 
 /*
  * return moon phase in mean solar days since new moon (rough, dont say I didnt warn you)
  */
-double moonphase(double dts)
+double moonphase(time_t unixt)
 {
-    dts -= jd2000_epoch_unixtime;
-    const spherical_point moon_position = geocentric_moon_position_of_date(dts/(86400.0*36525.0)); // julian centuries......
-    const double lunar_longitude_radians = moon_position.longitude * M_PI / 648000.0; // arcseconds to radians
-    double lunar_longitude_degrees = lunar_longitude_radians * 180.0 / M_PI; // radians to degrees
-    while (lunar_longitude_degrees > 360.0) {
-        lunar_longitude_degrees -= 360.0;
-    }
-    double solar_longitude = solar_longitude_of_date(dts);
+
+    const time_t jd2000_unixt = unixt - jd2000_epoch_unixtime;
+    const double t_julian_centuries = jd2000_unixt / (86400.0 * 36525.0);
+    const spherical_point moon_position = geocentric_moon_position_of_date(t_julian_centuries); // julian centuries......
+    const double lunar_longitude_degrees = fmod(moon_position.longitude / 3600.0, 360.0); // arcseconds to degrees mod 360
+    const double solar_longitude = solar_longitude_of_date(jd2000_unixt);
 
     // normalize
-    double angle = solar_longitude > lunar_longitude_degrees ? (lunar_longitude_degrees + 360.0) - solar_longitude : lunar_longitude_degrees - solar_longitude;
-    printf("lunar %f solar %f angle %f\t", lunar_longitude_degrees, solar_longitude, angle);
+    const double angle = solar_longitude > lunar_longitude_degrees ? (lunar_longitude_degrees + 360.0) - solar_longitude : lunar_longitude_degrees - solar_longitude;
+    printf("unixt %ld lunar %f solar %f angle %f\t", unixt, lunar_longitude_degrees, solar_longitude, angle);
 
 #if DIRTY_DEEDS_DONE_DIRT_CHEAP
     const double synodic_month_in_solar_days = 29.530588;
-    const double phase = synodic_month_in_solar_days * angle / 360.0;
-    if (phase > 0.0) {
-        return phase;
-    } else {
-        return synodic_month_in_solar_days + phase;
-    }
-    return phase;
+    return synodic_month_in_solar_days * angle / 360.0;
 #else
-#error *starts crying*
     return NaN;
 #endif
 }
@@ -53,26 +44,24 @@ static void test_moonphase() {
         printf("moonphase %f\n", phase);
         if (lastphase - phase > 20.0) {
             printf("new moon at unixtime %f\n", t);
-
             lastphase = phase;
             break;
         }
         lastphase = phase;
     }
 
-    //oops didnt find it but there had to be one
-    if (abs(t - expected) < 12*86400.0) { // well be generous, within 12 hours
-        printf("within normal tolerances, captain\n");
+    const double difference = fabs(t - expected);
+    if (difference < 12*86400.0) { // well be generous, within 12 hours
+        printf("within normal tolerances, captain (expected %f = 2019-10-28T03:38:00.000Z, difference = %f)\n", expected, difference);
     } else {
+        //oops didnt find it but there had to be one
         printf("sorry, charlie\n");
-
     }
 }
 
 static void moonphase_main(int argc, char *argv[]) {
-    //const double dt = t - epoch;
     test_moonphase();
-    const double phase = moonphase((double)time(NULL));
+    const double phase = moonphase(time(NULL));
     printf("Your phase now is %f\n", phase);
 }
 
