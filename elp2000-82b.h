@@ -93,13 +93,11 @@ spherical_point geocentric_moon_position(double t);
 
 double precession_of_date(double t);
 
-#if DIRTY_DEEDS_DONE_DIRT_CHEAP
 /*
  * very very quick n' dirty solar longitude calculation, done dirt cheap
  * (two out of three cheap, fast, and correct? how's one sound?)
  */
 double solar_longitude_of_date(double t);
-#endif
 
 /*
  * Computes geocentric position of the Moon in spherical coordiantes (longitude, latitude, distance) referred to the

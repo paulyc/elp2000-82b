@@ -3,9 +3,15 @@
  * Created by Serhii Tsyba (sertsy@gmail.com) on 08.06.10.
  */
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 #include "series.h"
 #include "arguments.h"
-#include <math.h>
 
 #define SERIE_A_TOTAL_MULTIPLIERS 4
 #define SERIE_A_TOTAL_COEFFICIENTS 7
@@ -20,7 +26,7 @@
 #define URANUS 6
 #define NEPTUNE 7
 
-double compute_serie_a_sin(double delaunay_arguments[], int multipliers[], double coefficients[], int n)
+double compute_serie_a_sin(const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n)
 {
     double acc;                 // accumualtive variable holding the sum of a serie
     double arg;                 // accumulating variable holding the argument of a sine
@@ -41,7 +47,7 @@ double compute_serie_a_sin(double delaunay_arguments[], int multipliers[], doubl
     return acc;
 }
 
-double compute_serie_a_cos(double delaunay_arguments[], int multipliers[], double coefficients[], int n)
+double compute_serie_a_cos(const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n)
 {
     double acc;                 // accumualtive variable holding the sum of a serie
     double arg;                 // accumulating variable holding the argument of a cosine
@@ -62,7 +68,7 @@ double compute_serie_a_cos(double delaunay_arguments[], int multipliers[], doubl
     return acc;
 }
 
-double compute_serie_b(double precession, double delaunay_arguments[], int multipliers[], double coefficients[], int n)
+double compute_serie_b(double precession, const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n)
 {
     double acc;                 // accumualtive variable holding the sum of a serie
     double arg;                 // accumulating variable holding the argument of a sine
@@ -89,7 +95,7 @@ double compute_serie_b(double precession, double delaunay_arguments[], int multi
     return acc;
 }
 
-double compute_serie_c(double planetary_arguments[], double delaunay_arguments[], int multipliers[], double coefficients[], int n)
+double compute_serie_c(const double planetary_arguments[], const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n)
 {
     double acc;             // accumualtive variable holding the sum of a serie
     double arg;                 // accumulating variable holding the argument of a sine
@@ -118,7 +124,7 @@ double compute_serie_c(double planetary_arguments[], double delaunay_arguments[]
     return acc;
 }
 
-double compute_serie_d(double planetary_arguments[], double delaunay_arguments[], int multipliers[], double coefficients[], int n)
+double compute_serie_d(const double planetary_arguments[], const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n)
 {
     double acc;         // accumualtive variable holding the sum of a serie
     double arg;             // accumulating variable holding the argument of a sine

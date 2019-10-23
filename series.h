@@ -40,7 +40,7 @@
  *
  * Source: Lunar Solution ELP 2000-82B. Explanatory note, p. 2
  */
-double compute_serie_a_sin(double delaunay_arguments[], int multipliers[], double coefficients[], int n);
+double compute_serie_a_sin(const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n);
 
 /*
  * Computes a cosine Fourier serie for the Main Problem of the ELP theory given the Delaunay arguments, array of
@@ -48,7 +48,7 @@ double compute_serie_a_sin(double delaunay_arguments[], int multipliers[], doubl
  *
  * Source: Lunar Solution ELP 2000-82B. Explanatory note, p. 2
  */
-double compute_serie_a_cos(double delaunay_arguments[], int multipliers[], double coefficients[], int n);
+double compute_serie_a_cos(const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n);
 
 /*
  * Computes a Poisson serie for either Earth figure perturbations, Moon figure perturbations, relativistic
@@ -57,7 +57,7 @@ double compute_serie_a_cos(double delaunay_arguments[], int multipliers[], doubl
  *
  * Source: Lunar Solution ELP 2000-82B. Explanatory note, p. 2
  */
-double compute_serie_b(double precession, double delaunay_arguments[], int multipliers[], double coefficients[], int n);
+double compute_serie_b(double precession, const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n);
 
 /*
  * Computes a Poisson serie for the first type of planetary perturbations of the ELP theory given planetary arguments,
@@ -65,7 +65,7 @@ double compute_serie_b(double precession, double delaunay_arguments[], int multi
  *
  * Source: Lunar Solution ELP 2000-82B. Explanatory note, p. 3
  */
-double compute_serie_c(double planetary_arguments[], double delaunay_arguments[], int multipliers[], double coefficients[], int n);
+double compute_serie_c(const double planetary_arguments[], const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n);
 
 /*
  * Computes a Poisson serie for the second type of planetary perturbations of the ELP theory given planetary arguments,
@@ -73,6 +73,6 @@ double compute_serie_c(double planetary_arguments[], double delaunay_arguments[]
  *
  * Source: Lunar Solution ELP 2000-82B. Explanatory note, p. 3
  */
-double compute_serie_d(double planetary_arguments[], double delaunay_arguments[], int multipliers[], double coefficients[], int n);
+double compute_serie_d(const double planetary_arguments[], const double delaunay_arguments[], const int multipliers[], const double coefficients[], int n);
 
 #endif // SERIES_H

@@ -3,6 +3,15 @@
  * Created by Serhii Tsyba (sertsy@gmail.com) on 21.04.10.
  */
 
+#define _USE_MATH_DEFINES 1
+#define _POSIX_SOURCE 1
+#include <math.h>
+#include <time.h>
+
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 #include "mainprob.h"
 #include "earthfig.h"
 #include "planetary1.h"
@@ -15,10 +24,9 @@
 #include "elp2000-82b.h"
 #include "series.h"
 #include "arguments.h"
+#include "sidereal_time.h"
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <time.h>
+
 
 spherical_point geocentric_moon_position(double t)
 {
@@ -166,18 +174,13 @@ double solar_longitude_of_date(double t)
     const double vernal_equinox = 1553119080 - jd2000_epoch_unixtime;
     const double solar_longitude = (360.0/365.25) * (t - vernal_equinox) / 86400.0;
     return solar_longitude; // TODO + precession_of_date();
-#else
-#error blah blah blah its FUBAR
-    // L(t) = mean longitude λ(t) + mean anomaly M(t)
-    const double λ_bar_0 = 280.458;
-    const double M_0 = 357.588;
-    const double n = 0.98564735;
-    const double e = 0.016711;
-    const double λ_bar = λ_bar_0 + n * t;
-    const double M = M_0 + n * t;
-    const double q = 2.0 * e * sin(M) + 1.25 * e * e * sin(2.0 * M);
-    const double λ = λ_bar + q;
-    return λ;
+#else // less cheap
+    const double jd2000_epoch_jd = 2451545.0; // 2000-01-01T12:00:00.000Z, Unixtime 946728000
+    const double jdt = (jd2000_epoch_jd + t / 86400.0) / 36525.0;
+    //const double T = jdt / (86400.0*36525.0);
+    //const double real_solar_longitude = get_mean_sidereal_time(jdt, jdt); // ??? jd ephemeris? 60 secs? close enough?
+    return fmod(280.46061837 + (360.98564736629 * (jdt - 2451545.0)) + (0.000387933 * t * t) - (t * t * t / 38710000.0), 360.0);
+    //return real_solar_longitude;
 #endif
 }
 
