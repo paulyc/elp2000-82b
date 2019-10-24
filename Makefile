@@ -10,10 +10,10 @@ elp2000.a: arguments.o elp2000-82b.o precession.o series.o sidereal_time.o
 	ar rcs elp2000.a arguments.o elp2000-82b.o precession.o series.o sidereal_time.o
 
 %.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -g -o $@ $< $(CFLAGS)
 
 moonphase: elp2000.a moonphase.o
-	$(LD) -o moonphase moonphase.o elp2000.a $(LDFLAGS)
+	$(LD) -g -o moonphase moonphase.o elp2000.a $(LDFLAGS)
 
 clean:
 	rm -f *.o moonphase elp2000.a

@@ -12,45 +12,47 @@ static const double jd2000_epoch_jd = 2451545.0; // 2000-01-01T12:00:00.000Z, Un
 static const time_t jd2000_epoch_unixtime = 946728000;
 
 /*
- * return moon phase in mean solar days since new moon (rough, dont say I didnt warn you)
+ * return moon phase in range [0.0, 1.0)
  */
-double moonphase(time_t unixt)
+double moonphase(time_t unixt, int use_sidereal_time)
 {
     const time_t jd2000_unixt = unixt - jd2000_epoch_unixtime;
     const double t_julian_centuries = jd2000_unixt / (86400.0 * 36525.0);
     const spherical_point moon_position = geocentric_moon_position_of_date(t_julian_centuries); // julian centuries......
     const double lunar_longitude_degrees = fmod(moon_position.longitude / 3600.0, 360.0); // arcseconds to degrees mod 360
     //const double solar_longitude = solar_longitude_of_date(jd2000_unixt);
-#define THIS_WORKS 0
-#if THIS_WORKS
-    const double jd = jd2000_epoch_jd + (unixt - jd2000_epoch_unixtime) / 86400.0 + 0.5;
+
+    const double jdtime = jd2000_epoch_jd + (unixt - jd2000_epoch_unixtime) / 86400.0;
+    const double jd = round(jdtime);
+    const double jdhours = jd - jdtime;
     const double jde = jd + 67.6439/86400.0;
-    const double solar_longitude = get_apparent_sidereal_time(jd, jde);
-#else
-    const double solar_longitude = solar_longitude_of_date(jd2000_unixt);
-#endif
+    double solar_longitude0 = get_apparent_sidereal_time(jd, jde);
+    const double solar_longitude_interp = jdhours < 0 ? get_apparent_sidereal_time(jd - 1.0, jde - 1.0) : get_apparent_sidereal_time(jd + 1.0, jde + 1.0);
+    // interpolate to the hour
+    const double solar_longitude_diff = fabs(solar_longitude_interp - solar_longitude0);
+    solar_longitude0 += -jdhours * solar_longitude_diff;
+
+    const double solar_longitude1 = solar_longitude_of_date(jd2000_unixt);
+
+    const double solar_longitude = use_sidereal_time ? solar_longitude0 : solar_longitude1;
+
     // normalize
     const double angle = solar_longitude > lunar_longitude_degrees ? (lunar_longitude_degrees + 360.0) - solar_longitude : lunar_longitude_degrees - solar_longitude;
-    printf("unixt %ld lunar %f solar %f angle %f\t", unixt, lunar_longitude_degrees, solar_longitude, angle);
+    printf("unixt %ld lunar %f solar %f solar0 %f solar1 %f angle %f\t", unixt, lunar_longitude_degrees, solar_longitude, solar_longitude0, solar_longitude1, angle);
 
-#if DIRTY_DEEDS_DONE_DIRT_CHEAP
-    const double synodic_month_in_solar_days = 29.530588;
-    return synodic_month_in_solar_days * angle / 360.0;
-#else
-    return NAN;
-#endif
+    return angle / 360.0;
 }
 
 static void test_moonphase() {
     // find new moon in oct 2019
-    double t;
-    double lastphase = 0.0;
-    double expected = 1572233880.0;
-    for (t = 1569931200.0; t < 1600031200.0; t += 3600) {
-        double phase = moonphase(t);
+    time_t t = 1569931200;
+    double lastphase = moonphase(t, 1);
+    double expected = 1572233880;
+    for ( ; t < 1600031200; t += 3600) {
+        double phase = moonphase(t, 1);
         printf("moonphase %f\n", phase);
-        if (phase - lastphase < 0) {
-            printf("new moon at unixtime %f\n", t);
+        if (fabs(phase - lastphase) > 0.1) {
+            printf("new moon at unixtime %ld\n", t);
             lastphase = phase;
             break;
         }
@@ -58,7 +60,7 @@ static void test_moonphase() {
     }
 
     const double difference = fabs(t - expected);
-    if (difference < 12*86400.0) { // well be generous, within 12 hours
+    if (difference < 12*86400) { // well be generous, within 12 hours
         printf("within normal tolerances, captain (expected %f = 2019-10-28T03:38:00.000Z, difference = %f)\n", expected, difference);
     } else {
         //oops didnt find it but there had to be one
@@ -68,8 +70,10 @@ static void test_moonphase() {
 
 static void moonphase_main(int argc, char *argv[]) {
     test_moonphase();
-    const double phase = moonphase(time(NULL));
-    printf("Your phase now is %f\n", phase);
+    const double phase = moonphase(time(NULL), 1);
+    const double mean_synodic_month_in_solar_days = 29.530588;
+    const double phase_in_mean_solar_days = phase * mean_synodic_month_in_solar_days;
+    printf("Your phase now is %f (%f in mean solar days)\n", phase, phase_in_mean_solar_days);
 }
 
 int main(int argc, char *argv[]) {
