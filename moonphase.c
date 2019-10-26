@@ -35,49 +35,67 @@ double moonphase(time_t unixt, int use_sidereal_time)
     const double solar_longitude1 = solar_longitude_of_date(jd2000_unixt);
 
     const double solar_longitude = use_sidereal_time ? solar_longitude0 : solar_longitude1;
-
+    // todo watch out for this rolling over - use radians
     // normalize
     const double angle = solar_longitude > lunar_longitude_degrees ? (lunar_longitude_degrees + 360.0) - solar_longitude : lunar_longitude_degrees - solar_longitude;
-    printf("unixt %ld lunar %f solar %f solar0 %f solar1 %f angle %f\t", unixt, lunar_longitude_degrees, solar_longitude, solar_longitude0, solar_longitude1, angle);
+  //  printf("unixt %ld lunar %f solar %f solar0 %f solar1 %f angle %f\t", unixt, lunar_longitude_degrees, solar_longitude, solar_longitude0, solar_longitude1, angle);
 
     return angle / 360.0;
 }
 
-static void test_moonphase() {
+static time_t nextmoon(time_t t) {
     // find new moon in oct 2019
     //time_t t = 1569931200;
     //double expected = 1572233880;
     // find next new moon
-    time_t t = time(NULL);
+    if (t == 0) {
+        t = time(NULL);
+    }
     double lastphase = moonphase(t, 1);
+    t += 600;
     // can't be more than 32 days away so it must be a bug, don't run forever
     for (time_t giveup = t+32*86400 ; t < giveup; t += 600) {
         double phase = moonphase(t, 1);
-        printf("moonphase %f\n", phase);
-        if (fabs(phase - lastphase) > 0.1) {
-            printf("new moon at unixtime %ld = %s\n", t, asctime(gmtime(&t)));
-            lastphase = phase;
-            break;
+       // printf("moonphase %f\n", phase);
+        if (fabs(phase - lastphase) > 0.5) {
+          //  printf("new moon at unixtime %ld = %s\n", t, asctime(gmtime(&t)));
+            return t;
         }
         lastphase = phase;
     }
-/*
-    const double difference = fabs(t - expected);
-    if (difference < 12*86400) { // well be generous, within 12 hours
-        printf("within normal tolerances, captain (expected %f = 2019-10-28T03:38:00.000Z, difference = %f)\n", expected, difference);
-    } else {
-        //oops didnt find it but there had to be one
-        printf("sorry, charlie\n");
-    }*/
+    return 0;
 }
 
+static void test_nextmoon() {
+    const time_t t = 1569931200;
+    const time_t expected = 1572233880;
+    const time_t newmoon = nextmoon(t);
+    const time_t difference = newmoon - expected;
+    printf("expected %s, ", asctime(gmtime(&expected)));
+    printf("got %s, difference %d\n", asctime(gmtime(&newmoon)), difference);
+    if (fabs(difference) < 12*3600) { // well be generous, within 12 hours
+        printf("within normal tolerances, captain\n", difference);
+    } else {
+        //oops?
+        printf("sorry, charlie\n");
+    }
+}
+
+
 static void moonphase_main(int argc, char *argv[]) {
-    test_moonphase();
-    const double phase = moonphase(time(NULL), 1);
+    test_nextmoon();
+    time_t t = time(NULL);
+    const double phase = moonphase(t, 1);
     const double mean_synodic_month_in_solar_days = 29.530588;
     // really is just solar days since last new moon but good enough estimate
     const double phase_in_mean_solar_days = phase * mean_synodic_month_in_solar_days;
     printf("Your phase now is %f (~%f in mean solar days)\n", phase, phase_in_mean_solar_days);
+    
+    while (!feof(stdin)) {
+        const time_t next = nextmoon(t);
+        printf("nextmoon %s\n", asctime(gmtime(&next)));
+        t += 25 * 86400;
+    }   
 }
 
 int main(int argc, char *argv[]) {
