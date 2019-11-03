@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <time.h>
+#include <stdlib.h>
 
 #include "elp2000-82b.h"
 #include "sidereal_time.h"
@@ -25,9 +26,9 @@ double moonphase(time_t unixt, int use_sidereal_time)
     const double jdtime = jd2000_epoch_jd + (unixt - jd2000_epoch_unixtime) / 86400.0 - 0.5;
     const double jd = round(jdtime);
     const double jdhours = jdtime - jd;
-    const double jde = jd + 67.6439/86400.0;
-    double solar_longitude0 = get_apparent_sidereal_time(jd, jde);
-    const double solar_longitude_interp = jdhours < 0 ? get_apparent_sidereal_time(jd - 1.0, jde - 1.0) : get_apparent_sidereal_time(jd + 1.0, jde + 1.0);
+    const double jde = jd + 69.18/86400.0;//67.6439/86400.0;
+    double solar_longitude0 = get_mean_sidereal_time(jd, jde);
+    const double solar_longitude_interp = jdhours < 0 ? get_mean_sidereal_time(jd - 1.0, jde - 1.0) : get_apparent_sidereal_time(jd + 1.0, jde + 1.0);
     // interpolate to the hour
     const double solar_longitude_diff = fabs(solar_longitude_interp - solar_longitude0);
     solar_longitude0 += jdhours * solar_longitude_diff;
@@ -38,7 +39,7 @@ double moonphase(time_t unixt, int use_sidereal_time)
     // todo watch out for this rolling over - use radians
     // normalize
     const double angle = solar_longitude > lunar_longitude_degrees ? (lunar_longitude_degrees + 360.0) - solar_longitude : lunar_longitude_degrees - solar_longitude;
-  //  printf("unixt %ld lunar %f solar %f solar0 %f solar1 %f angle %f\t", unixt, lunar_longitude_degrees, solar_longitude, solar_longitude0, solar_longitude1, angle);
+//    printf("unixt %ld lunar %f solar %f solar0 %f solar1 %f angle %f\n", unixt, lunar_longitude_degrees, solar_longitude, solar_longitude0, solar_longitude1, angle);
 
     return angle / 360.0;
 }
@@ -52,9 +53,9 @@ static time_t nextmoon(time_t t) {
         t = time(NULL);
     }
     double lastphase = moonphase(t, 1);
-    t += 600;
+    t += 300;
     // can't be more than 32 days away so it must be a bug, don't run forever
-    for (time_t giveup = t+32*86400 ; t < giveup; t += 600) {
+    for (time_t giveup = t+32*86400 ; t < giveup; t += 300) {
         double phase = moonphase(t, 1);
        // printf("moonphase %f\n", phase);
         if (fabs(phase - lastphase) > 0.5) {
@@ -72,9 +73,9 @@ static void test_nextmoon() {
     const time_t newmoon = nextmoon(t);
     const time_t difference = newmoon - expected;
     printf("expected %s, ", asctime(gmtime(&expected)));
-    printf("got %s, difference %d\n", asctime(gmtime(&newmoon)), difference);
-    if (fabs(difference) < 12*3600) { // well be generous, within 12 hours
-        printf("within normal tolerances, captain\n", difference);
+    printf("got %s, difference %ld\n", asctime(gmtime(&newmoon)), difference);
+    if (labs(difference) < 12*3600) { // well be generous, within 12 hours
+        printf("within normal tolerances, captain %f min\n", difference/60.0);
     } else {
         //oops?
         printf("sorry, charlie\n");
@@ -94,7 +95,7 @@ static void moonphase_main(int argc, char *argv[]) {
     while (!feof(stdin)) {
         const time_t next = nextmoon(t);
         printf("nextmoon %s\n", asctime(gmtime(&next)));
-        t += 25 * 86400;
+        t = next + 10 * 86400;
     }   
 }
 
