@@ -1,6 +1,5 @@
 // Copyright (C) 2019 Paul Ciarlo <paul.ciarlo@gmail.com
 
-#define _USE_MATH_DEFINES 1
 #include <math.h>
 #include <stdio.h>
 #include <time.h>
@@ -35,11 +34,14 @@ double moonphase(time_t unixt, int use_sidereal_time)
 
     const double solar_longitude1 = solar_longitude_of_date(jd2000_unixt);
 
-    const double solar_longitude = use_sidereal_time ? solar_longitude0 : solar_longitude1;
+    double solar_longitude = use_sidereal_time ? solar_longitude0 : solar_longitude1;
+    if (solar_longitude > 360.0 || solar_longitude < 0.0) {
+        solar_longitude = 0.0;
+    }
     // todo watch out for this rolling over - use radians
     // normalize
     const double angle = solar_longitude > lunar_longitude_degrees ? (lunar_longitude_degrees + 360.0) - solar_longitude : lunar_longitude_degrees - solar_longitude;
-//    printf("unixt %ld lunar %f solar %f solar0 %f solar1 %f angle %f\n", unixt, lunar_longitude_degrees, solar_longitude, solar_longitude0, solar_longitude1, angle);
+    //printf("unixt %ld lunar %f solar %f solar0 %f solar1 %f angle %f\n", unixt, lunar_longitude_degrees, solar_longitude, solar_longitude0, solar_longitude1, angle);
 
     return angle / 360.0;
 }
@@ -52,19 +54,28 @@ static time_t nextmoon(time_t t) {
     if (t == 0) {
         t = time(NULL);
     }
-    double lastphase = moonphase(t, 1);
-    t += 300;
+    double phase = moonphase(t, 1);
+    double nextphase = phase;
     // can't be more than 32 days away so it must be a bug, don't run forever
-    for (time_t giveup = t+32*86400 ; t < giveup; t += 300) {
-        double phase = moonphase(t, 1);
-       // printf("moonphase %f\n", phase);
-        if (fabs(phase - lastphase) > 0.5) {
-          //  printf("new moon at unixtime %ld = %s\n", t, asctime(gmtime(&t)));
-            return t;
+    time_t giveup = t+33*86400;
+    for (;;) {
+        t += 86400;
+        if (t > giveup) {
+            return 0;
         }
-        lastphase = phase;
+        nextphase = moonphase(t, 1);
+        if (nextphase < phase) {
+            phase = nextphase;
+            break;
+        }
+        phase = nextphase;
     }
-    return 0;
+    while (nextphase <= phase) {
+        t -= 60;
+        phase = nextphase;
+        nextphase = moonphase(t, 1);
+    }
+    return t+60;
 }
 
 static void test_nextmoon() {
@@ -82,7 +93,6 @@ static void test_nextmoon() {
     }
 }
 
-
 static void moonphase_main(int argc, char *argv[]) {
     test_nextmoon();
     time_t t = time(NULL);
@@ -95,7 +105,7 @@ static void moonphase_main(int argc, char *argv[]) {
     while (!feof(stdin)) {
         const time_t next = nextmoon(t);
         printf("nextmoon %s\n", asctime(gmtime(&next)));
-        t = next + 10 * 86400;
+        t = next + 86400;
     }   
 }
 

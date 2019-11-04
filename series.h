@@ -34,6 +34,12 @@
 #ifndef SERIES_H
 #define SERIES_H
 
+#include <math.h>
+
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 /*
  * Computes a sine Fourier serie for the Main Problem of the ELP theory given the Delaunay arguments, array of
  * mutipliers, array of coefficients and the size of the serie.

@@ -3,15 +3,6 @@
  * Created by Serhii Tsyba (sertsy@gmail.com) on 21.04.10.
  */
 
-#define _USE_MATH_DEFINES 1
-#define _POSIX_SOURCE 1
-#include <math.h>
-#include <time.h>
-
-#ifndef M_PI
-#define M_PI           3.14159265358979323846
-#endif
-
 #include "mainprob.h"
 #include "earthfig.h"
 #include "planetary1.h"
@@ -25,8 +16,6 @@
 #include "series.h"
 #include "arguments.h"
 #include "sidereal_time.h"
-
-
 
 spherical_point geocentric_moon_position(double t)
 {

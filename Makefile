@@ -1,6 +1,6 @@
 CC=gcc
 LD=gcc
-CFLAGS=-std=c11
+CFLAGS=-std=c11 -D_USE_MATH_DEFINES=1
 LDFLAGS=-lm
 DEPS = arguments.h earthfig.h elp2000-82b.h mainprob.h moonfig.h planetary1.h planetary2.h precession.h relativistic.h series.h sidereal_time.h solarecc.h tidal.h
 

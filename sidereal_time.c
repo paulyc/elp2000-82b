@@ -18,14 +18,7 @@ Copyright (C) 2015 Georg Zotti (deactivated old IAU-1980 Nutation functions, upd
 
 */
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <assert.h>
-#include "precession.h"
-
-#ifndef M_PI
-#define M_PI           3.14159265358979323846
-#endif
+#include "sidereal_time.h"
 
 /* puts a large angle in the correct range 0 - 360 degrees */
 double range_degrees(double d)

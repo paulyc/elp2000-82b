@@ -18,6 +18,13 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifndef PRECESSION_H
 #define PRECESSION_H
 
+#include <math.h>
+#include <assert.h>
+
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

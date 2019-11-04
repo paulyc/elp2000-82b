@@ -31,13 +31,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  * This is by far enough for Stellarium as of 2015, but just to make sure I added a few asserts.
  */
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-#include <assert.h>
-
-#ifndef M_PI
-#define M_PI           3.14159265358979323846
-#endif
+#include "precession.h"
 
 /* Interval threshold (days) for re-computing these values. with 1, compute only 1/day:  */
 #define PRECESSION_EPOCH_THRESHOLD 1.0

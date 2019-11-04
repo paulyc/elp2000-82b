@@ -1,3 +1,4 @@
 *.o
 elp2000.a
 moonphase
+.DS_Store

@@ -9,6 +9,8 @@
 #ifndef SIDEREAL_TIME_H
 #define SIDEREAL_TIME_H
 
+#include "precession.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

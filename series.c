@@ -3,13 +3,6 @@
  * Created by Serhii Tsyba (sertsy@gmail.com) on 08.06.10.
  */
 
-#define _USE_MATH_DEFINES
-#include <math.h>
-
-#ifndef M_PI
-#define M_PI           3.14159265358979323846
-#endif
-
 #include "series.h"
 #include "arguments.h"
 
